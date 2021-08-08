@@ -2,6 +2,11 @@ from validate_json import validate_json, json_schema_user
 
 
 def test_get_users_validate_json(api):
+    """
+    Проверяю что пользователи соответсвуют json схеме
+    :param api:
+    :return:
+    """
     res = api.get_users()
     res_json = res.json()
     assert res.status_code == 200
@@ -10,6 +15,11 @@ def test_get_users_validate_json(api):
 
 
 def test_get_users_unique_ids(api):
+    """
+    Проверяю что у пользователей id уникальные
+    :param api:
+    :return:
+    """
     res = api.get_users()
     res_json = res.json()
     assert res.status_code == 200
