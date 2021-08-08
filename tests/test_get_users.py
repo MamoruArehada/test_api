@@ -16,9 +16,9 @@ def test_get_users_validate_json(api):
 
 def test_get_users_unique_ids(api):
     """
-    Проверяю что у пользователей id уникальные
+    Проверяю что у пользователей уникальные id
     :param api:
-    :return:
+    :return:-
     """
     res = api.get_users()
     res_json = res.json()

@@ -10,10 +10,12 @@ json_schema_user = {
         },
         "first_name": {
             "type": "string",
+            "minLength": 1,
             "pattern": "^[\\sa-zA-z-]+$"
         },
         "second_name": {
             "type": "string",
+            "minLength": 1,
             "pattern": "^[\\sa-zA-z-]+$"
         },
         "age": {

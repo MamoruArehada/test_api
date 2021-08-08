@@ -25,3 +25,8 @@ class APIClient:
 
     def get_users_count(self):
         return len(self.get_users().json()['data'])
+
+
+if __name__ == '__main__':
+    api = APIClient('http://127.0.0.1:5000')
+    api.create_user('', 'fdsf')

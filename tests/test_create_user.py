@@ -21,7 +21,7 @@ def test_create_user_check_added_with_valid_values(api, first_name, second_name,
 
     assert res_json == {'first_name': first_name, 'second_name': second_name, 'age': age}
     count_all_users_after_add_empty_user = api.get_users_count()
-    assert count_all_users == count_all_users_after_add_empty_user - 1
+    assert count_all_users == count_all_users_after_add_empty_user - 1, 'Количество пользователей не изменилось'
 
     res_user = api.get_user(user_id)
     res_user_json = res_user.json()['data'][0]
@@ -50,7 +50,7 @@ def test_create_user_check_do_not_added_with_empty_values(api, first_name, secon
     assert res.status_code != 201
 
     count_all_users_after_add_empty_user = api.get_users_count()
-    assert count_all_users == count_all_users_after_add_empty_user
+    assert count_all_users == count_all_users_after_add_empty_user, 'Количество пользователей изменилось'
 
 
 @pytest.mark.parametrize('first_name, second_name, age', [('Aleksey', 'Alekseyvich', '56'),
@@ -61,7 +61,10 @@ def test_create_user_check_do_not_added_with_empty_values(api, first_name, secon
                                                           ('Aleksey', 56, '56'),
                                                           ('Aleksey', 'Alekseyvich', -1),
                                                           ('Aleksey', 'Alekseyvich', 125),
-                                                          ('!@#$%^&*()-~_+10', '!@#$%^&*()-~_+10', 125)])
+                                                          ('Aleksey', '!@#$%^&*()-~_+10', 125),
+                                                          ('!@#$%^&*()-~_+10', 'Alekseyvich', 125),
+                                                          ('', 'Alekseyvich', 125),
+                                                          ('Aleksey', '', 125)])
 def test_create_user_check_do_not_added_with_invalid_values(api, first_name, second_name, age):
     """
     Проверяю добавление пользователя с невалидными значениями
@@ -76,4 +79,4 @@ def test_create_user_check_do_not_added_with_invalid_values(api, first_name, sec
     assert res.status_code != 201
 
     count_all_users_after_add_empty_user = api.get_users_count()
-    assert count_all_users == count_all_users_after_add_empty_user
+    assert count_all_users == count_all_users_after_add_empty_user, 'Количество пользователей изменилось'

@@ -8,8 +8,12 @@ def test_get_user_validate_json(api):
     :param api:
     :return:
     """
-    res = api.get_user(user_id=2)
+    res = api.get_user(user_id=99)
+    print(res)
+    print(res.status_code)
+    
     res_json = res.json()
+    print(res_json)
     assert res.status_code == 200
     user_data = res_json['data'][0]
     print(user_data)
